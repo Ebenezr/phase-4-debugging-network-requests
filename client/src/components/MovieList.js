@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CategoryFilter from "./CategoryFilter";
@@ -8,11 +9,9 @@ function MovieList(props) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("/movies")
-      .then((r) => r.json())
-      .then((movies) => {
-        setMovies(movies);
-      });
+    axios.get("/movies").then((movies) => {
+      setMovies(movies.data);
+    });
   }, []);
 
   const categories = movies

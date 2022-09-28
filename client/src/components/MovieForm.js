@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-
+import axios from "axios";
 function MovieForm() {
   const [formData, setFormData] = useState({
     title: "",
@@ -16,13 +16,8 @@ function MovieForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("/movies", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    axios
+      .post("/movies", formData)
       .then((r) => r.json())
       .then((data) => {
         console.log(data);
